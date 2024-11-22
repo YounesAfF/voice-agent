@@ -155,14 +155,19 @@ app.register(async (fastify) => {
 });
 
 // Start server
-const start = async () => {
-    try {
-        await app.listen({ port: PORT, host: '0.0.0.0' });
-        console.log(`Server is running on port ${PORT}`);
-    } catch (err) {
-        console.error('Failed to start server:', err);
-        process.exit(1);
-    }
-};
+// const start = async () => {
+//     try {
+//         await app.listen({ port: PORT, host: '0.0.0.0' });
+//         console.log(`Server is running on port ${PORT}`);
+//     } catch (err) {
+//         console.error('Failed to start server:', err);
+//         process.exit(1);
+//     }
+// };
 
-start();
+// start();
+
+export default async function handler(req, reply) {
+  await app.ready();
+  app.server.emit("request", req, reply);
+}
