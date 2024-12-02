@@ -170,6 +170,6 @@ export default async function handler(req, reply) {
     hasTwilioToken: !!TWILIO_AUTH_TOKEN,
     port: PORT,
   });
-  app.listen({ port: PORT });
+  await app.ready();
   app.server.emit("request", req, reply);
 }
